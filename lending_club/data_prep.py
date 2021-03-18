@@ -7,14 +7,14 @@ import config
 
 def get_lending_club_data(data_location: str = config.APPROVED_LOANS_CSV):
        extension = data_location.split('.')[-1]
-       if extension = 'csv':
+       if extension == 'csv':
               accepted_loans = dd.read_csv(data_location,
                                     dtype={'desc': 'object', 
                                            'id': 'object',
                                            'sec_app_earliest_cr_line': 'object'}, 
                                     parse_dates = ['issue_d',],
                                     low_memory=False)
-       elif extension = 'parquet':
+       elif extension == 'parquet':
               accepted_loans = dd.read_parquet(data_location,
                                                engine='fastparquet')
        else:
