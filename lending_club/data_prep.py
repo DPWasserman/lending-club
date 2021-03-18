@@ -34,7 +34,6 @@ def create_features(df):
        return df
 
 def split_file_by_year(df):
-       df = df.dropna(subset=['issue_d'])
        df['Year'] = df.issue_d.dt.year
        for year in df.Year.unique():
               year_excerpt_df = df.loc[df.Year==year,:]
