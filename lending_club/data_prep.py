@@ -6,12 +6,19 @@ sys.path.append('../lending_club')
 import config
 
 def get_lending_club_data(data_location: str = config.APPROVED_LOANS_CSV):
-       accepted_loans = dd.read_csv(data_location,
+       extension = data_location.split('.')[-1]
+       if extension = 'csv':
+              accepted_loans = dd.read_csv(data_location,
                                     dtype={'desc': 'object', 
                                            'id': 'object',
                                            'sec_app_earliest_cr_line': 'object'}, 
                                     parse_dates = ['issue_d',],
                                     low_memory=False)
+       elif extension = 'parquet':
+              accepted_loans = dd.read_parquet(data_location,
+                                               engine='fastparquet')
+       else:
+              raise ValueError('Bad extension! Please try another file type.')
        return accepted_loans
 
 def split_file_by_year(df):
