@@ -5,8 +5,8 @@ import sys
 sys.path.append('../lending_club')
 import config
 
-def get_lending_club_data(data_location: str = config.APPROVED_LOANS_CSV):
-       extension = data_location.split('.')[-1]
+def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV):
+       extension = str(data_location).split('.')[-1]
        if extension == 'csv':
               accepted_loans = dd.read_csv(data_location,
                                     dtype={'desc': 'object', 
