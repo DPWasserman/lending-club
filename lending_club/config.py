@@ -6,6 +6,7 @@ if not os.path.exists(DATAPATH):
     os.mkdir(DATAPATH)
 
 APPROVED_LOANS_CSV = DATAPATH / 'accepted_2007_to_2018Q4.csv'
+APPROVED_LOANS_PARQUET = DATAPATH / 'accepted-*.parquet'
 
 if not os.path.exists(APPROVED_LOANS_CSV):
     raise OSError(f'{APPROVED_LOANS_CSV} does not exist! Please place in the data directory.')
