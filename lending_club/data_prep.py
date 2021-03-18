@@ -26,7 +26,5 @@ def split_file_by_year(df):
        df['Year'] = df.issue_d.dt.year
        for year in df.Year.unique():
               year_excerpt_df = df.loc[df.Year==year,:]
-              #filename = config.DATAPATH / f'accepted_{year}.csv'
-              #year_excerpt_df.to_csv(filename, index=False)
               filename = config.DATAPATH / f'accepted-{year}.parquet'
               year_excerpt_df.to_parquet(filename, engine='fastparquet')
