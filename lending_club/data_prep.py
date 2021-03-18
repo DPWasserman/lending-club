@@ -1,4 +1,5 @@
 import dask.dataframe as dd
+import numpy as np
 import pandas as pd
 
 import sys
@@ -19,7 +20,20 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV):
                                                engine='fastparquet')
        else:
               raise ValueError('Bad extension! Please try another file type.')
+       accepted_loans = clean(accepted_loans)
        return accepted_loans
+
+def clean(df):
+       df = df.dropna(subset=['issue_d']) # If there is no issue date, this is not a "good" record
+       df['id'] = df['id'].astype(int)
+       df = df.set_index('id')
+       return df
+
+def create_features(df):
+       df['annual_inc_total'] = dd.from_array(np.where(df['annual_inc_joint'].isna(),
+                                                 df['annual_inc'],
+                                                 df['annual_inc_joint']))
+       return df
 
 def split_file_by_year(df):
        df = df.dropna(subset=['issue_d'])
