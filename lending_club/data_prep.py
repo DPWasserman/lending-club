@@ -74,6 +74,6 @@ def make_binary(df):
        y = dfl['disbursement_method'].to_dask_array()
        df['application_type_indiv']= da.where(x =='Individual',1,0)
        df['disbursement_method_cash']= da.where(y =='Cash',1,0)
-       df = df.drop(['application_type','disbursement_method'], axis
+       df = df.drop(['application_type','disbursement_method'], axis)
        return df
 
