@@ -6,7 +6,7 @@ import sys
 sys.path.append('../lending_club')
 import config
 
-def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV):
+def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV, clean_file: bool = True):
        extension = str(data_location).split('.')[-1]
        if extension == 'csv':
               accepted_loans = dd.read_csv(data_location,
@@ -20,13 +20,15 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV):
                                                engine='fastparquet')
        else:
               raise ValueError('Bad extension! Please try another file type.')
-       accepted_loans = clean(accepted_loans)
+       if clean_file:
+              accepted_loans = clean(accepted_loans)
        return accepted_loans
 
 def clean(df):
        df = df.dropna(subset=['issue_d']) # If there is no issue date, this is not a "good" record
        df['id'] = df['id'].astype(int)
        df = df.set_index('id')
+       df = df.loc[df['grade'].isin(['A','B','C','D','E']),:] # Remove grades in F or G
        return df
 
 def create_features(df):
