@@ -51,7 +51,7 @@ def clean(df):
        df = df.loc[df['grade'].isin(['A','B','C','D','E']),:] # Remove grades in F or G
        df = df.loc[df['loan_status'].isin(['Charged Off','Fully Paid']),:] # Remove loans that have not finalized
        df = df[df.annual_inc < 2e7] # Remove outliers
-       df['emp_length'].fillna('-1 years (N/A)')
+       df['emp_length'] = df['emp_length'].fillna('-1 years (N/A)') # Impute -1 years when no employee length is given
        return df
 
 def refine_features(df):
@@ -70,7 +70,6 @@ def split_file_by_year(df):
               year_excerpt_df = df.loc[df.Year==year,:]
               filename = config.DATAPATH / f'accepted-{year}.parquet'
               year_excerpt_df.to_parquet(filename, engine='fastparquet')
-
 
 def make_binary(df):
        """Convert columns to binary"""
