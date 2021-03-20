@@ -44,19 +44,23 @@ def clean(df):
                               'open_acc',
                               'pub_rec',
                               'pub_rec_bankruptcies',
+                              'term'
                               ]) 
        df['id'] = df['id'].astype(int)
        df = df.set_index('id')
        df = df.loc[df['grade'].isin(['A','B','C','D','E']),:] # Remove grades in F or G
        df = df.loc[df['loan_status'].isin(['Charged Off','Fully Paid']),:] # Remove loans that have not finalized
        df = df[df.annual_inc < 2e7] # Remove outliers
+       df['emp_length'].fillna('-1 years (N/A)')
        return df
 
-def create_features(df):
-       """Creates features on the raw dataset"""
-       #df['annual_inc_total'] = df['annual_inc_joint'].fillna(df['annual_inc'])
-       
-       #df['dti_total'] = df['dti_joint'].fillna(df['dti'])
+def refine_features(df):
+       """Creates features on the processed Pandas dataset"""
+       df['term'] = df.term.str.extract('(\d+)').astype(int)
+       df['emp_length'] = np.where(df['emp_length'][:1]=='<', # <1 Years = 0
+                                   0,
+                                   df['emp_length'].str.extract('([-]*\d+)')).astype(int)
+       df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
        return df
 
 def split_file_by_year(df):

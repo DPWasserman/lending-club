@@ -33,7 +33,7 @@ SELECTED_FEATURES = ['id',
                      'pub_rec_bankruptcies',
                      'purpose', # Need to dummify
                      'sub_grade', # Need to dummify or be ordinal encoded
-                     'term',
+                     'term', # Need to convert to integer from string
                      'verification_status',
                      'zip_code' # Need to dummify
                     ]
