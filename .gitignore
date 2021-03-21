@@ -1,5 +1,6 @@
 /.vscode
 /data
+/models/catboost_info
 *-checkpoint.ipynb
 *.csv
 *.pyc
