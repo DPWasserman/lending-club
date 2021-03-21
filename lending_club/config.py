@@ -39,3 +39,16 @@ SELECTED_FEATURES = ['id',
                     ]
 
 TARGET_COL = 'loan_status' # Only look at Fully Paid/Charged Off
+
+VARS_TO_DUMMIFY = [ 'addr_state', 
+                    'application_type',
+                    'disbursement_method', 
+                    'emp_title', 
+                    'grade', 
+                    'home_ownership', 
+                    'initial_list_status', 
+                    'purpose', 
+                    'sub_grade', 
+                    'verification_status',
+                    'zip_code'
+                    ]
