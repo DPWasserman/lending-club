@@ -6,12 +6,9 @@ import config
 
 def divide_by_term(df, term_length:int):
     latest_year = 2018 - (term_length // 12)
-    print(latest_year)
-    termed_df = df[df['term']==term_length]
-    print(f'df shape: {termed_df.shape}')
-    termed_df['Year'] = termed_df.issue_d.dt.year
-    termed_df = termed_df[termed_df['Year']<=latest_year]
-    print(f'df shape: {termed_df.shape}')
+    years = df.issue_d.dt.year
+    termed_df = df.loc[np.logical_and(df['term']==term_length,
+                                      years<=latest_year), :]
     return termed_df
 
 def split_data(df, target_col=config.TARGET_COL, test_size=0.3, random_state=None):
