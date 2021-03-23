@@ -57,7 +57,7 @@ def clean(df):
 def refine_features(df):
        """Creates features on the processed Pandas dataset"""
        df['term'] = df.term.astype(str).str.extract('(\d+)').astype(int)
-       df['emp_length'] = np.where(df['emp_length'].asttype(str).str.find('<')>-1, # <1 Years = 0 
+       df['emp_length'] = np.where(df['emp_length'].astype(str).str.find('<')>-1, # <1 Years = 0 
                                    0,
                                    df['emp_length'].astype(str).str.extract('([-]*\d+)')).astype(int)
        df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days # TODO: TEST!
