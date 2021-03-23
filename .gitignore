@@ -3,5 +3,6 @@
 /models/catboost_info
 *-checkpoint.ipynb
 *.csv
+*.model
 *.pyc
 *.url
