@@ -61,7 +61,8 @@ def refine_features(df):
                                    0,
                                    df['emp_length'].astype(str).str.extract('([-]*\d+)')).astype(int)
        df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days # TODO: TEST!
-       df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
+       if pd.api.types.is_string_dtype(df.loan_status):
+              df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
        return df
 
 def split_file_by_year(df):
