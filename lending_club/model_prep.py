@@ -14,4 +14,4 @@ def divide_by_term(df, term_length:int):
 def split_data(df, target_col=config.TARGET_COL, test_size=0.3, random_state=None):
     X = df.drop(target_col, axis=1)
     y = df[target_col]
-    return train_test_split(X, y, test_size=0.3, random_state=random_state)
+    return train_test_split(X, y, test_size=test_size, random_state=random_state)
