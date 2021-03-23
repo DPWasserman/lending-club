@@ -56,10 +56,11 @@ def clean(df):
 
 def refine_features(df):
        """Creates features on the processed Pandas dataset"""
-       df['term'] = df.term.str.extract('(\d+)').astype(int)
-       df['emp_length'] = np.where(df['emp_length'][:1]=='<', # <1 Years = 0
+       df['term'] = df.term.astype(str).str.extract('(\d+)').astype(int)
+       df['emp_length'] = np.where(df['emp_length'].asttype(str).str.find('<')>-1, # <1 Years = 0 
                                    0,
-                                   df['emp_length'].str.extract('([-]*\d+)')).astype(int)
+                                   df['emp_length'].astype(str).str.extract('([-]*\d+)')).astype(int)
+       df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days # TODO: TEST!
        df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
        return df
 
@@ -73,10 +74,10 @@ def split_file_by_year(df):
 
 def make_binary(df):
        """Convert columns to binary"""
-       X = dfl['application_type'].to_dask_array()
-       y = dfl['disbursement_method'].to_dask_array()
+       X = df['application_type'].to_dask_array()
+       y = df['disbursement_method'].to_dask_array()
        df['application_type_indiv']= da.where(x =='Individual',1,0)
        df['disbursement_method_cash']= da.where(y =='Cash',1,0)
-       df = df.drop(['application_type','disbursement_method'], axis)
+       df = df.drop(['application_type','disbursement_method'], axis=1)
        return df
 
