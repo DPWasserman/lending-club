@@ -48,8 +48,7 @@ VARS_TO_DUMMIFY = [ 'addr_state',
                     'grade', 
                     'home_ownership', 
                     'initial_list_status', 
-                    'purpose', 
-                    'sub_grade', 
+                    'purpose',  
                     'verification_status',
                     'zip_code'
                     ]
