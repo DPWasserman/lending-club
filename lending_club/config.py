@@ -14,6 +14,7 @@ SELECTED_FEATURES = ['id',
                      'addr_state', # Need to dummify
                      'annual_inc',
                      'application_type', # Need to binarize 
+                     'days_since_first_credit', # Derived field
                      'disbursement_method', # Need to binarize
                      'dti',
                      'earliest_cr_line',
