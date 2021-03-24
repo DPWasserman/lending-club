@@ -56,13 +56,17 @@ def clean(df):
 
 def refine_features(df):
        """Creates features on the processed Pandas dataset"""
-       df['term'] = df.term.astype(str).str.extract('(\d+)').astype(int)
-       df['emp_length'] = np.where(df['emp_length'].astype(str).str.find('<')>-1, # <1 Years = 0 
-                                   0,
-                                   df['emp_length'].astype(str).str.extract('([-]*\d+)')).astype(int)
-       df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days # TODO: TEST!
+       if pd.api.types.is_string_dtype(df['term']):
+              df['term'] = df.term.astype(str).str.extract('(\d+)').astype(int)
+       if pd.api.types.is_string_dtype(df['emp_length']):
+              df['emp_length'] = np.where(df['emp_length'].str.find('<')>-1, # <1 Years = 0 
+                                          '0 years',
+                                          df['emp_length'])
+              df['emp_length'] = df['emp_length'].str.extract('([-]?\d+)')
+              df['emp_length'] = df['emp_length'].astype(int)
        if pd.api.types.is_string_dtype(df.loan_status):
               df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
+       df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days # TODO: TEST!
        return df
 
 def split_file_by_year(df):
