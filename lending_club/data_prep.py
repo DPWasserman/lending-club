@@ -66,6 +66,13 @@ def refine_features(df):
               df['emp_length'] = df['emp_length'].astype(int)
        if pd.api.types.is_string_dtype(df.loan_status):
               df['loan_status'] = np.where(df['loan_status']=='Charged Off',0, 1) # Charged Off = 0; Fully Paid = 1
+       if pd.api.types.is_string_dtype(df.sub_grade):
+              df['sub_grade'] = df['sub_grade'].replace({'A1':1,'A2':2,'A3':3,'A4':4,'A5':5,
+                                                         'B1':6,'B2':7,'B3':8,'B4':9,'B5':10,
+                                                         'C1':11,'C2':12,'C3':13,'C4':14,'C5':15,
+                                                         'D1':16,'D2':17,'D3':18,'D4':19,'D5':20,
+                                                         'E1':21,'E2':22,'E3':23,'E4':24,'E5':25})
+              df['sub_grade'] = df['sub_grade'].astype(int)
        df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days
        return df
 
