@@ -28,7 +28,7 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV, clean_file:
               raise ValueError('Bad extension! Please try another file type.')
 
        if clean_file:
-              accepted_loans = accepted_loans.loc[:, config.RAW_COLUMNS + [config.TARGET_COL]]
+              accepted_loans = accepted_loans.loc[:, config.RAW_FEATURES]
               accepted_loans = clean(accepted_loans)
        
        if filename_to_save:
