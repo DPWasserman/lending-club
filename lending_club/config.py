@@ -26,7 +26,7 @@ RAW_FEATURES = ['id',
                 'grade', # Need to dummify or be ordinal encoded
                 'home_ownership', # Need to dummify
                 'initial_list_status', # Need to dummify (binarize)
-                'inq_last_6mnths',
+                'inq_last_6mths',
                 'installment',
                 'int_rate',
                 'issue_d',
