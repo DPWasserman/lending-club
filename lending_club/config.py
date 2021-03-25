@@ -12,7 +12,7 @@ if not os.path.exists(APPROVED_LOANS_CSV):
 
 DATE_FEATURES = ['earliest_cr_line','issue_d','last_pymnt_d',]
 
-RAW_FEATURES = [ 'id',
+RAW_FEATURES = ['id',
                 'addr_state', # Need to dummify
                 'annual_inc',
                 'application_type', # Need to binarize 
