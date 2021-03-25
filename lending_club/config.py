@@ -20,8 +20,9 @@ SELECTED_FEATURES = ['id',
                      'earliest_cr_line',
                      'emp_length', # Need to convert to number and add NAs
                      'emp_title', # Needs to be encoded
-                     'fico_range_high', 
-                     'fico_range_low',
+                     'fico_score_average', # Derived field
+                     #'fico_range_high', # Used to derive the average
+                     #'fico_range_low', # Used to derive the average
                      'grade', # Need to dummify or be ordinal encoded
                      'home_ownership', # Need to dummify
                      'initial_list_status', # Need to dummify (binarize)
