@@ -28,6 +28,7 @@ RAW_COLUMNS = [ 'id',
                 'int_rate',
                 'issue_d',
                 'loan_amnt',
+                'loan_status',
                 'open_acc', 
                 'pub_rec', 
                 'pub_rec_bankruptcies',
@@ -38,7 +39,7 @@ RAW_COLUMNS = [ 'id',
                 'zip_code' # Need to dummify
             ]
 
-SELECTED_FEATURES = ['id',
+SELECTED_FEATURES = [#'id', Identification feature (Index)
                      'addr_state', # Need to dummify
                      'annual_inc',
                      'application_type', # Need to binarize 
@@ -51,7 +52,7 @@ SELECTED_FEATURES = ['id',
                      'fico_score_average', # Derived field
                      #'fico_range_high', # Used to derive the average
                      #'fico_range_low', # Used to derive the average
-                     'grade', # Need to dummify or be ordinal encoded
+                     #'grade', # Need to dummify or be ordinal encoded
                      'home_ownership', # Need to dummify
                      'initial_list_status', # Need to dummify (binarize)
                      'installment',
@@ -70,11 +71,11 @@ SELECTED_FEATURES = ['id',
 
 TARGET_COL = 'loan_status' # Only look at Fully Paid/Charged Off
 
-VARS_TO_DUMMIFY = [ 'addr_state', 
+VARS_TO_DUMMIFY = [ #'addr_state', 
                     'application_type',
                     'disbursement_method', 
-                    'emp_title', 
-                    'grade', 
+                    #'emp_title', 
+                    #'grade', # Removed since sub_grade is considered
                     'home_ownership', 
                     'initial_list_status', 
                     'purpose',  
