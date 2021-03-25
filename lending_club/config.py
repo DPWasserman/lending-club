@@ -12,7 +12,7 @@ if not os.path.exists(APPROVED_LOANS_CSV):
 
 DATE_FEATURES = ['earliest_cr_line','issue_d','last_pymnt_d',]
 
-RAW_COLUMNS = [ 'id',
+RAW_FEATURES = [ 'id',
                 'addr_state', # Need to dummify
                 'annual_inc',
                 'application_type', # Need to binarize 
@@ -26,6 +26,7 @@ RAW_COLUMNS = [ 'id',
                 'grade', # Need to dummify or be ordinal encoded
                 'home_ownership', # Need to dummify
                 'initial_list_status', # Need to dummify (binarize)
+                'inq_last_6mnths',
                 'installment',
                 'int_rate',
                 'issue_d',
@@ -38,6 +39,7 @@ RAW_COLUMNS = [ 'id',
                 'purpose', # Need to dummify
                 'sub_grade', # Need to dummify or be ordinal encoded
                 'term', # Need to convert to integer from string
+                'total_pymnt',
                 'verification_status',
                 'zip_code' # Need to dummify
             ]
