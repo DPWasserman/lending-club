@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+from sklearn.metrics import confusion_matrix
 
 def get_feature_importance(model, X: pd.DataFrame) -> pd.Series:
     """
@@ -22,3 +23,9 @@ def graph_importance(feats: pd.Series, model_name: str =''):
                  })
     fig.update_layout(showlegend=False) 
     return fig
+
+def output_confusion_matrix(model, X, y):
+    y_pred = model.predict(X)
+    cm = confusion_matrix(y, y_pred)
+    cm_df = pd.DataFrame(cm, columns=['Pred: Charged Off', 'Pred: Fully Paid'], index=['True: Charged Off', 'True: Fully Paid'])
+    return cm_df
