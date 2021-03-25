@@ -10,6 +10,8 @@ APPROVED_LOANS_CSV = DATAPATH / 'accepted_2007_to_2018Q4.csv'
 if not os.path.exists(APPROVED_LOANS_CSV):
     raise OSError(f'{APPROVED_LOANS_CSV} does not exist! Please place in the data directory.')
 
+DATE_FEATURES = ['earliest_cr_line','issue_d','last_pymnt_d',]
+
 RAW_COLUMNS = [ 'id',
                 'addr_state', # Need to dummify
                 'annual_inc',
@@ -27,6 +29,7 @@ RAW_COLUMNS = [ 'id',
                 'installment',
                 'int_rate',
                 'issue_d',
+                'last_pymnt_d',
                 'loan_amnt',
                 'loan_status',
                 'open_acc', 
