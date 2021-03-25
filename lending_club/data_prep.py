@@ -74,6 +74,7 @@ def refine_features(df):
                                                          'E1':21,'E2':22,'E3':23,'E4':24,'E5':25})
               df['sub_grade'] = df['sub_grade'].astype(int)
        df['days_since_first_credit'] = (df.issue_d - df.earliest_cr_line).dt.days
+       df['fico_score_average'] = (df['fico_range_high'] + df['fico_range_low'])/2
        return df
 
 def split_file_by_year(df):
