@@ -19,7 +19,7 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV, clean_file:
                                     dtype={'desc': 'object', 
                                            'id': 'object',
                                            'sec_app_earliest_cr_line': 'object'}, 
-                                    parse_dates = ['issue_d','earliest_cr_line'],
+                                    parse_dates = config.DATE_FEATURES,
                                     low_memory=False)
        elif extension == 'parquet':
               accepted_loans = dd.read_parquet(data_location,
