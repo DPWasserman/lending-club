@@ -10,8 +10,10 @@ APPROVED_LOANS_CSV = DATAPATH / 'accepted_2007_to_2018Q4.csv'
 if not os.path.exists(APPROVED_LOANS_CSV):
     raise OSError(f'{APPROVED_LOANS_CSV} does not exist! Please place in the data directory.')
 
+# These are the features that need to be parsed as dates
 DATE_FEATURES = ['earliest_cr_line','issue_d','last_pymnt_d',]
 
+# These are the features to be extracted from the original data file
 RAW_FEATURES = ['id',
                 'addr_state', # Need to dummify
                 'annual_inc',
@@ -44,6 +46,7 @@ RAW_FEATURES = ['id',
                 'zip_code' # Need to dummify
             ]
 
+# These are the features for modeling purposes
 SELECTED_FEATURES = [#'id', Identification feature (Index)
                      'addr_state', # Need to dummify
                      'annual_inc',
@@ -74,12 +77,14 @@ SELECTED_FEATURES = [#'id', Identification feature (Index)
                      'zip_code' # Need to dummify
                     ]
 
+# This is the target column to be predicted
 TARGET_COL = 'loan_status' # Only look at Fully Paid/Charged Off
 
-VARS_TO_DUMMIFY = [ #'addr_state', 
+# These variables need to be dummified
+VARS_TO_DUMMIFY = [ #'addr_state', # Removed since zip_code is more granular
                     'application_type',
                     'disbursement_method', 
-                    #'emp_title', 
+                    #'emp_title', # Removed because of the high variety
                     #'grade', # Removed since sub_grade is considered
                     'home_ownership', 
                     'initial_list_status', 
