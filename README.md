@@ -14,4 +14,4 @@
 - **EDA**: Jupyter Notebooks used to explore the data
 - **lending_club**: Python package used by the Jupyter Notebooks
 - **models**: Machine Learning models for predicting defaults
-- **Project Proposal**: Background about the project
+- **Project Documentations**: Background about the project
