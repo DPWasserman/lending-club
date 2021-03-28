@@ -29,3 +29,14 @@ def output_confusion_matrix(model, X, y):
     cm = confusion_matrix(y, y_pred)
     cm_df = pd.DataFrame(cm, columns=['Pred: Charged Off', 'Pred: Fully Paid'], index=['True: Charged Off', 'True: Fully Paid'])
     return cm_df
+
+def calculate_PnL_return(model, X, y, PnL_series):
+    """
+    When taking in a predicting model, the features, the target, and the Profit and Loss series,
+    this function will return the return for that portfolio.
+    """
+    model_results = pd.Series(model.predict(X), index=X.index, name='prediction')
+    df = pd.concat([X, y, model_results], axis=1)
+    portfolio_df = df.loc[df['prediction']==1,:]
+    full_df = portfolio_df.merge(PnL_series, how='inner', left_index=True, right_index=True)
+    return full_df.PnL.sum()/full_df.loan_amnt.sum()
