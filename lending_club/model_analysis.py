@@ -25,6 +25,7 @@ def graph_importance(feats: pd.Series, model_name: str =''):
     return fig
 
 def output_confusion_matrix(model, X, y):
+    """Given a model, a feature set, and a corresponding target, this will output a pretty confusion matrix"""
     y_pred = model.predict(X)
     cm = confusion_matrix(y, y_pred)
     cm_df = pd.DataFrame(cm, columns=['Pred: Charged Off', 'Pred: Fully Paid'], index=['True: Charged Off', 'True: Fully Paid'])
