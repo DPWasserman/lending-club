@@ -22,7 +22,7 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV, clean_file:
                                     parse_dates = config.DATE_FEATURES,
                                     low_memory=False)
        elif extension == 'parquet':
-              accepted_loans = pd.read_parquet(data_location,
+              accepted_loans = dd.read_parquet(data_location,
                                                engine='fastparquet')
        elif extension == 'pickle':
               accepted_loans = pd.read_pickle(data_location)
@@ -37,8 +37,6 @@ def get_lending_club_data(data_location = config.APPROVED_LOANS_CSV, clean_file:
               save_extension = str(filename_to_save).split('.')[-1]
               if save_extension == 'parquet':
                      accepted_loans.to_parquet(config.DATAPATH / filename_to_save, engine='fastparquet')
-              elif save_extension == 'pickle':
-                     accepted_loans.to_pickle(config.DATAPATH / filename_to_save)
               elif save_extension == 'csv':
                      accepted_loans.to_csv(config.DATAPATH / filename_to_save)
               else:
