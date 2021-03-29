@@ -4,8 +4,10 @@
 
 ## Setup
 - By running `import config`, a data folder will be created.
-- Place the `accepted_2007_to_2018Q4.csv` file in the data folder.
+- Download `accepted_2007_to_2018Q4.csv` from [https://www.kaggle.com/wordsforthewise/lending-club]
+- Place the downloaded file in the data folder.
 - The code in the Jupyter Notebooks will execute as expected without error.
+- Run the `Create_Working_DataFrame.ipynb` Jupyter Notebook to create the working data file.
 - You can see an example Jupyter Notebook in EDA/Sample_EDA.ipynb.
 
 ## Folder Structure
