@@ -1,5 +1,6 @@
 # Lending Club Loan Analysis
 - A joint project by fellows of the New York City Data Science Academy to evaluate investment opportunities in Lending Club loans
+- The write-up for this project can be found at https://nycdatascience.com/blog/student-works/are-lending-club-notes-a-good-investment/
 
 ## Setup
 - By running `import config`, a data folder will be created.
